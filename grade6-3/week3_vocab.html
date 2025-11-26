@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الأسبوع 3 – قواعد</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #004e92; /* أزرق غامق */
+            --secondary: #1F2F4E; /* أزرق داكن */
+            --accent: #00A896; /* أخضر مائي */
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --radius: 12px;
+            --shadow-float: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: 0.3s ease;
+        }
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            background: var(--light-bg);
+            color: var(--secondary);
+            line-height: 1.8;
+            direction: rtl;
+            text-align: right;
+        }
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: var(--white);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+        .container {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-float);
+            margin-top: -40px; /* Overlap with header */
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            color: var(--primary);
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            border-bottom: 2px solid rgba(0, 168, 150, 0.2);
+            padding-bottom: 10px;
+        }
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        ul li {
+            background: #e9f7f6;
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-right: 5px solid var(--accent);
+            font-size: 1.05rem;
+            color: #222;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #eee;
+            padding: 12px 15px;
+            text-align: right;
+            font-size: 1rem;
+        }
+        th {
+            background: var(--primary);
+            color: var(--white);
+            font-weight: 700;
+        }
+        tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+        .note {
+            background: #fff3cd;
+            border-right: 5px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #664d03;
+        }
+        .note strong {
+            color: #664d03;
+        }
+        .example {
+            background: #e6f7ff;
+            border-right: 5px solid #2196f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #0d366d;
+        }
+        .example p {
+            margin: 5px 0;
+            font-size: 1.05rem;
+            color: #0d366d;
+        }
+        .back-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn:hover {
+            background: #0066b8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .divider {
+            border: none;
+            border-top: 2px dashed #ccc;
+            margin: 40px 0;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .container { padding: 20px; margin-top: -20px; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.3rem; }
+            p, ul li, th, td { font-size: 1rem; }
+            .back-btn { padding: 10px 20px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>قواعد الأسبوع 3</h1>
+</header>
+
+<div class="container">
+    <h2>قواعد الأسبوع الثالث</h2>
+
+    <h3>🧐 زمن الماضي البسيط (Simple Past Tense)</h3>
+    <p>يُستخدم هذا الزمن للحديث عن فعل بدأ وانتهى في الماضي، أو عن أحداث متتالية في الماضي.</p>
+
+    <h3>📝 كيفية استخدامه وتكوينه:</h3>
+    <p>أ. تكوين الفعل في الماضي:</p>
+    <p>تنقسم الأفعال إلى نوعين عند تحويلها للماضي:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>النوع</th>
+                <th>القاعدة</th>
+                <th>أمثلة</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1. الأفعال المنتظمة (Regular Verbs)</td>
+                <td>نضيف في الغالب (ed) لنهاية الفعل.</td>
+                <td>Live → Lived<br>Call → Called</td>
+            </tr>
+            <tr>
+                <td>2. الأفعال غير المنتظمة (Irregular Verbs)</td>
+                <td>يتغير شكل الفعل تمامًا، ويجب حفظها.</td>
+                <td>Go → Went<br>Have → Had<br>See → Saw</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="note">
+        <p><strong>ملاحظة خاصة بالفعل "To Be" (يكون):</strong></p>
+        <p>يُستخدم Was أو Were في الماضي:</p>
+        <ul>
+            <li>Was مع الضمائر المفردة (I, He, She, It) أو الاسم المفرد.</li>
+            <li>Were مع الضمائر الجمع (You, We, They) أو الاسم الجمع.</li>
+        </ul>
+    </div>
+
+    <p>ب. الكلمات المفتاحية (Keywords):</p>
+    <p>عندما ترى هذه الكلمات، غالباً ما تحتاج لاستخدام الماضي البسيط:</p>
+    <ul>
+        <li>Yesterday (أمس)</li>
+        <li>Last (مثل: Last week, Last year)</li>
+        <li>Ago (منذ)</li>
+        <li>أي تاريخ أو وقت محدد في الماضي (مثل: In 2020).</li>
+    </ul>
+
+    <p>ج. النفي والسؤال:</p>
+    <p>نستخدم الفعل المساعد did للنفي والسؤال، ويعود الفعل الأصلي إلى صيغته الأصلية (المصدر):</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>الجملة</th>
+                <th>القاعدة</th>
+                <th>مثال</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>الجملة المثبتة</td>
+                <td>الفاعل + الفعل في الماضي</td>
+                <td>She went to the park.</td>
+            </tr>
+            <tr>
+                <td>النفي (Negative)</td>
+                <td>الفاعل + did not (didn't) + الفعل في المصدر</td>
+                <td>She didn't go to the park.</td>
+            </tr>
+            <tr>
+                <td>السؤال (Question)</td>
+                <td>Did + الفاعل + الفعل في المصدر + ؟</td>
+                <td>Did she go to the park?</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="divider"></div>
+
+    <h3>🔗 أداة الربط "but"</h3>
+    <p><strong>ماذا تعني "but"؟</strong></p>
+    <p>تعني "but" في اللغة العربية: لكن/أما.</p>
+
+    <p><strong>متى نستخدمها؟</strong></p>
+    <p>نستخدم "but" لربط جملتين متعارضتين أو متناقضتين في المعنى. تُظهر الجملة الثانية نتيجة أو معلومة مفاجئة أو مختلفة عن المتوقع بناءً على الجملة الأولى.</p>
+
+    <p><strong>القاعدة الأساسية:</strong> الجملة الأولى (الفكرة) ، but الجملة الثانية (التناقض).</p>
+
+    <p><strong>أمثلة للتوضيح:</strong></p>
+    <div class="example">
+        <p><strong>مثال 1:</strong></p>
+        <p>I was sick, but I went to school.</p>
+        <p>(كنت مريضاً لكن ذهبت إلى المدرسة). التناقض: عادة المريض لا يذهب للمدرسة.</p>
+    </div>
+    <div class="example">
+        <p><strong>مثال 2:</strong></p>
+        <p>Amy broke her arm at the summer camp, but she had a great time.</p>
+        <p>(كسرت إيمي ذراعها في المخيم الصيفي لكن قضت وقتاً رائعاً). التناقض: كسْر الذراع ليس أمراً رائعاً، لكنها استمتعت.</p>
+    </div>
+    <div class="example">
+        <p><strong>مثال 3:</strong></p>
+        <p>It was raining heavily, but I went out.</p>
+        <p>(كانت تمطر بغزارة لكن خرجت). التناقض: عادة لا يخرج الناس في المطر الغزارة.</p>
+    </div>
+
+    <div style="text-align:center">
+        <a class="back-btn" href="../../../index.html">العودة للصفحة الرئيسية</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الأسبوع 4 – المفردات مع النطق</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{font-family:'Tahoma',Arial;margin:0;background:#f5f7fa;color:#333}
+        header{background:#004e92;color:#fff;padding:20px;text-align:center}
+        .container{max-width:900px;margin:auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+        h1{color:#004e92;text-align:center}
+        .vocab-items{display:flex;flex-wrap:wrap;gap:15px;justify-content:center}
+        .card{flex:0 0 calc(25% - 15px);min-width:180px;border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center;background:#fafafa}
+        .card h3{margin:8px 0;font-size:18px}
+        .card p{margin:5px 0;font-size:15px;color:#555}
+        .play-btn{background:#004e92;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:14px;margin-top:8px}
+        .play-btn:hover{background:#0066b8}
+        .back-btn{display:inline-block;margin:20px auto;background:#004e92;color:#fff;padding:10px 20px;border-radius:4px;text-decoration:none}
+        @media (max-width:768px){.card{flex:0 0 calc(50% - 15px)}}
+        @media (max-width:480px){.card{flex:0 0 100%}}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>مفردات الأسبوع 4 مع النطق</h1>
+</header>
+
+<div class="container">
+    <div class="vocab-items" id="vocabItems">
+        <!-- الكلمات ستُملأ بالجافاسكريبت -->
+    </div>
+    <div style="text-align:center">
+        <a class="back-btn" href="../../../index.html">العودة للرئيسية</a>
+    </div>
+</div>
+
+<script>
+    // قائمة الكلمات (يمكنك تعديلها أو زيادتها)
+    const words = [
+        {en:"adventure", ar:"مغامرة", img:"adventure.jpeg"},
+        {en:"burst", ar:"ينفجر", img:"burst.jpeg"},
+        {en:"chase", ar:"يطارد", img:"chase.jpeg"},
+        {en:"eighteenth", ar:"الثامن عشر", img:"eighteenth.jpeg"},
+        {en:"fifteenth", ar:"الخامس عشر", img:"fifteenth.jpeg"},
+        {en:"fourteenth", ar:"الرابع عشر", img:"fourteenth.jpeg"},
+        {en:"nineteenth", ar:"التاسع عشر", img:"nineteenth.jpeg"},
+        {en:"seventeenth", ar:"السابع عشر", img:"seventeenth.jpeg"},
+        {en:"sixteenth", ar:"السادس عشر", img:"sixteenth.jpeg"},
+        {en:"thirteenth", ar:"الثالث عشر", img:"thirteenth.jpeg"},
+        {en:"thirtieth", ar:"الثلاثون", img:"thirtieth.jpeg"},
+        {en:"turn over", ar:"يقلب", img:"turn over.jpeg"},
+        {en:"twentieth", ar:"العشرون", img:"twentieth.jpeg"},
+        {en:"twenty first", ar:"الحادي والعشرون", img:"twenty first.png"},
+        {en:"when", ar:"متى", img:"when.png"}
+    ];
+
+    const container = document.getElementById('vocabItems');
+
+    words.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <img src="${encodeURIComponent(item.img)}" alt="${item.en}" style="max-width:100%; height:120px; object-fit:cover; border-radius:5px; margin-bottom:8px;">
+            <h3>${item.en}</h3>
+            <p><b>${item.ar}</b></p>
+            <button class="play-btn" onclick="speak('${item.en}')">🔊 نطق</button>
+        `;
+        container.appendChild(card);
+    });
+
+    function speak(text){
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'en-US';
+        utter.rate = 0.9;
+        speechSynthesis.speak(utter);
+    }
+</script>
+
+</body>
+</html>
