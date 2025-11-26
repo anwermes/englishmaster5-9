@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مفردات الأسبوع الأول - الصف السابع</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #004e92;
+            --secondary: #1F2F4E;
+            --accent: #00A896;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --radius: 12px;
+            --shadow-float: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: 0.3s ease;
+        }
+
+        * {box-sizing: border-box;}
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            background: var(--light-bg);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        header h1 {font-size: 2.5rem; margin-bottom: 5px; font-weight: 900;}
+        header p {font-size: 1.1rem; margin: 0; opacity: 0.9;}
+
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        nav a:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .container {
+            padding: 40px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            background: #0066b8;
+            transform: translateY(-2px);
+        }
+
+        .vocab-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .vocab-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow-float);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .vocab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .word {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .pronunciation {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .meaning {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .audio-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+        .audio-btn:hover {
+            background: #007f72;
+            transform: scale(1.1);
+        }
+
+        /* نموذج تكبير الصورة */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1200px;
+            max-height: 90vh;
+            object-fit: contain;
+            animation: zoom 0.3s ease;
+        }
+
+        @keyframes zoom {
+            from {transform: scale(0.5)}
+            to {transform: scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {font-size: 2rem;}
+            header p {font-size: 1rem;}
+            .container {padding: 20px;}
+            nav a {padding: 10px 15px; font-size: 0.95rem;}
+            .vocab-container {grid-template-columns: 1fr;}
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>English For Grade 7</h1>
+    <p>مفردات الأسبوع الأول - الصف السابع</p>
+</header>
+
+<nav>
+    <a href="../../../index.html"><i class="fas fa-home"></i> الرئيسية</a>
+    <a href="week1_solution.html"><i class="fas fa-file-alt"></i> البطاقة</a>
+</nav>
+
+<div class="container">
+    <a class="back-btn" href="../../../index.html"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+
+    <div class="vocab-image">
+        <img src="vocab.jpg" alt="مفردات الأسبوع الأول" style="max-width: 100%; border-radius: var(--radius); margin-bottom: 30px; box-shadow: var(--shadow-float); cursor: pointer;" onclick="enlargeImage(this)">
+    </div>
+
+    <div class="vocab-container">
+    </div>
+</div>
+
+<script>
+    // إضافة وظيفة تشغيل الصوت
+    document.querySelectorAll('.audio-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            // هنا يمكن إضافة وظيفة تشغيل الصوت الفعلية
+            console.log('Play audio');
+        });
+    });
+</script>
+
+<!-- نموذج تكبير الصورة -->
+<div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+    // الحصول على نموذج التكبير
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.getElementsByClassName('close')[0];
+
+    // دالة تكبير الصورة
+    function enlargeImage(img) {
+        modal.style.display = 'block';
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+    }
+
+    // إغلاق النموذج عند النقر على زر الإغلاق
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    // إغلاق النموذج عند النقر في أي مكان خارج الصورة
+    modal.onclick = function() {
+        modal.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حل بطاقة الأسبوع الثاني - الصف السابع</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #004e92;
+            --secondary: #1F2F4E;
+            --accent: #00A896;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --radius: 12px;
+            --shadow-float: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: 0.3s ease;
+        }
+
+        /* نموذج تكبير الصورة */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            cursor: pointer;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1200px;
+            max-height: 90vh;
+            object-fit: contain;
+            animation: zoom 0.3s ease;
+        }
+
+        @keyframes zoom {
+            from {transform: scale(0.5)}
+            to {transform: scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        * {box-sizing: border-box;}
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            background: var(--light-bg);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        header h1 {font-size: 2.5rem; margin-bottom: 5px; font-weight: 900;}
+        header p {font-size: 1.1rem; margin: 0; opacity: 0.9;}
+
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        nav a:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .container {
+            padding: 40px 20px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            background: #0066b8;
+            transform: translateY(-2px);
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-float);
+            transition: var(--transition);
+            flex: 0 0 400px;
+            max-width: 400px;
+            margin: 10px;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+            display: block;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .card-img:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-float);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin: 0 0 15px 0;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {font-size: 2rem;}
+            header p {font-size: 1rem;}
+            .container {padding: 20px;}
+            nav a {padding: 10px 15px; font-size: 0.95rem;}
+            .card-container {grid-template-columns: 1fr;}
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>English For Grade 7</h1>
+    <p>بطاقة الأسبوع الثاني - الصف السابع</p>
+</header>
+
+<nav>
+    <a href="../../../index.html"><i class="fas fa-home"></i> الرئيسية</a>
+    <a href="../week1/week1_solution.html"><i class="fas fa-arrow-left"></i> الأسبوع الأول</a>
+    <a href="../week3/week3_solution.html"><i class="fas fa-arrow-right"></i> الأسبوع الثالث</a>
+</nav>
+
+<div class="container">
+    <a class="back-btn" href="../../../index.html"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+
+    <div class="card-container">
+        <!-- Cards -->
+        <div class="card">
+            <img src="card1.jpg" alt="Card 1" class="card-img">
+        </div>
+
+        <div class="card">
+            <img src="card2.jpg" alt="Card 2" class="card-img">
+        </div>
+    </div>
+</div>
+
+<!-- نموذج تكبير الصورة -->
+<div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+    // الحصول على نموذج التكبير
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.getElementsByClassName('close')[0];
+
+    // إضافة حدث النقر لكل صورة
+    document.querySelectorAll('.card-img').forEach(img => {
+        img.onclick = function() {
+            modal.style.display = 'block';
+            modalImg.src = this.src;
+            modalImg.alt = this.alt;
+        }
+    });
+
+    // إغلاق النموذج عند النقر على زر الإغلاق
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    // إغلاق النموذج عند النقر في أي مكان خارج الصورة
+    modal.onclick = function() {
+        modal.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
