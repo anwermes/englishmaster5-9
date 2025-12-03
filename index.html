@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>English Mastery | المعلم أنور عايش مسمح</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2F2F2F;
+            --light: #F7FFF7;
+        }
+        * {margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+        body {font-family:'Cairo',sans-serif;background:#1A535C;color:var(--dark);padding-bottom:120px;min-height:100vh}
+        
+        .container {max-width:800px;margin:0 auto;padding:15px}
+        
+        /* Header */
+        header {background:var(--light);padding:15px;border-radius:0 0 25px 25px;box-shadow:0 4px 10px rgba(0,0,0,0.1);position:sticky;top:0;z-index:100}
+        .header-inner {display:flex;justify-content:space-between;align-items:center}
+        
+        .user-stats {background:#eee;padding:5px 15px;border-radius:50px;display:flex;align-items:center;gap:10px;cursor:pointer;border:2px solid var(--secondary)}
+        
+        /* Audio Box Style */
+        .audio-box {
+            background: #fff; padding: 12px; border-radius: 15px; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 10px; font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #eee;
+        }
+        .speed-slider {flex:1; height: 5px; border-radius: 5px; background: #ddd; -webkit-appearance: none;}
+        .speed-slider::-webkit-slider-thumb {-webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--secondary); cursor: pointer;}
+
+        /* Pages */
+        .page {display:none}
+        .page.show {display:block;animation:fadeIn 0.3s}
+        @keyframes fadeIn {from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+        
+        /* Updates Section */
+        .updates-container {
+            margin-top: 40px; margin-bottom: 10px; padding-top: 20px;
+            border-top: 1px dashed rgba(255,255,255,0.3); animation: fadeIn 0.5s ease-in;
+        }
+        .updates-header {
+            text-align: center; color: #fff; margin-bottom: 15px; font-weight: 800; font-size: 1.1rem;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .updates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .update-card {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 15px; border-radius: 18px; text-decoration: none; color: #fff;
+            transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative; overflow: hidden;
+        }
+        .update-card:active { transform: scale(0.95); }
+        .update-card i { font-size: 2rem; margin-bottom: 8px; }
+        .update-card span { font-weight: bold; font-size: 0.9rem; }
+        
+        .game-link { background: linear-gradient(135deg, #FF9966 0%, #FF5E62 100%); border: 2px solid rgba(255,255,255,0.2); }
+        .telegram-link { background: linear-gradient(135deg, #2980b9 0%, #2c3e50 100%); border: 2px solid rgba(255,255,255,0.2); }
+        
+        .update-card::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg); animation: shine 3s infinite;
+        }
+        @keyframes shine { 100% { left: 200%; } }
+
+        /* Grades */
+        .grades-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin-top:20px}
+        .grade-card {background:#fff;padding:20px;border-radius:20px;text-align:center;box-shadow:0 4px 0 rgba(0,0,0,0.1);cursor:pointer;transition:0.2s}
+        .grade-card:active {transform:translateY(4px);box-shadow:none}
+        .grade-card h1 {color:var(--primary);font-size:2.5rem;margin-bottom:5px}
+
+        /* Nav */
+        .week-scroll {display:flex;gap:10px;overflow-x:auto;padding:10px 0;margin-bottom:15px}
+        .week-btn {min-width:70px;height:70px;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.3);border-radius:15px;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer}
+        .week-btn.active {background:var(--accent);color:var(--dark);border-color:#fff;transform:scale(1.1)}
+
+        .tabs {display:flex;gap:5px;overflow-x:auto;padding-bottom:10px}
+        .tab-btn {flex:1;min-width:90px;padding:10px;background:#eee;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-size:0.9rem}
+        .tab-btn.active {background:var(--primary);color:#fff}
+
+        /* Content Cards */
+        .vocab-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px}
+        .vocab-card {background:#fff;padding:15px;border-radius:15px;text-align:center;border:1px solid #eee}
+        .vocab-card img { width: 100%; height: 120px; object-fit: contain; margin-bottom: 10px; }
+        
+        /* Games Styles */
+        .game-area {background:#fff;padding:20px;border-radius:20px;text-align:center;margin-top:20px}
+        .game-header {display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+        
+        .listen-icon {
+            font-size: 4rem; width: 100px; height: 100px; background: #f0f8ff; 
+            border-radius: 50%; display:inline-flex; align-items:center; justify-content:center;
+            border: 4px solid var(--secondary); cursor: pointer; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin: 20px auto;
+        }
+        .listen-icon:active {transform:scale(0.9);}
+        .listen-icon.playing {animation: pulse 1s infinite; background: var(--primary); color: white; border-color: white;}
+        @keyframes pulse {0%{box-shadow: 0 0 0 0 rgba(255,107,107,0.7);} 70%{box-shadow: 0 0 0 20px rgba(255,107,107,0);} 100%{box-shadow: 0 0 0 0 rgba(255,107,107,0);}}
+
+        .options-grid {display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+        .option-btn {
+            padding:15px; border:2px solid #eee; border-radius:10px; cursor:pointer; 
+            background:#f9f9f9; font-size: 1.1rem; font-weight: bold;
+        }
+        .option-btn img {width: 100%; height: 80px; object-fit: contain;}
+        .correct {background:#d4edda !important;border-color:#28a745 !important; color: #155724;}
+        .incorrect {background:#f8d7da !important;border-color:#dc3545 !important; color: #721c24;}
+
+        /* Rules Styles */
+        .rule-box {background:#f9f9f9;padding:15px;border-radius:15px;margin-bottom:15px;border-right:4px solid var(--accent)}
+        .example-box {background:#eef;padding:10px;border-radius:10px;margin-top:10px;direction:ltr;text-align:left;font-family:monospace}
+        .grammar-container h3 {color:var(--secondary);margin-bottom:15px;border-bottom:2px solid #eee;padding-bottom:10px}
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #414345, #232526);
+            color: #fff; padding: 30px 20px; text-align: center;
+            border-radius: 20px 20px 0 0; margin-top: 40px;
+        }
+        .social-links {display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;}
+        .social-links a {
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: #fff; text-decoration: none; transition: 0.3s;
+        }
+        .fb {background: #3b5998;} .tg {background: #0088cc;} .wa {background: #25d366;}
+
+        /* Modals */
+        .feedback-popup {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            background: #fff; padding: 20px 40px; border-radius: 30px; text-align: center;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5); z-index: 3000; transition: 0.3s; border: 4px solid var(--accent);
+        }
+        .feedback-popup.show {transform: translate(-50%, -50%) scale(1);}
+
+        .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:2000;justify-content:center;align-items:center}
+        .modal-content {background:#fff;width:90%;max-width:400px;padding:20px;border-radius:20px;max-height:80vh;overflow-y:auto;text-align:center}
+        
+        .btn {background:var(--secondary);color:#fff;border:none;padding:8px 20px;border-radius:15px;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #3aaae0;margin:5px}
+        .btn:active {transform:translateY(4px);box-shadow:none}
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="header-inner">
+            <div style="font-weight:900;color:var(--primary);font-size:1.2rem">أبطال الإنجليزية 🌟</div>
+            <div class="user-stats" onclick="document.getElementById('shopModal').style.display='flex'">
+                <span style="color:#f39c12">💰 <span id="pts">0</span></span>
+                <img id="myAvatar" src="" style="width:30px;height:30px;border-radius:50%">
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Home -->
+    <div id="homePage" class="page show">
+        <div style="text-align:center;color:#fff;padding:30px 0 10px 0">
+            <img id="heroAvatar" src="" style="width:100px;height:100px;border-radius:50%;border:4px solid #fff;margin-bottom:15px">
+            <h1>مرحباً يا بطل!</h1>
+            <p>اختر صفك لنبدأ المغامرة</p>
+        </div>
+
+        <div class="grades-grid">
+            <div class="grade-card" onclick="loadGrade(5)"><h1>5</h1>الصف الخامس</div>
+            <div class="grade-card" onclick="loadGrade(6)"><h1>6</h1>الصف السادس</div>
+            <div class="grade-card" onclick="loadGrade(7)"><h1>7</h1>الصف السابع</div>
+            <div class="grade-card" onclick="loadGrade(8)"><h1>8</h1>الصف الثامن</div>
+            <div class="grade-card" onclick="loadGrade(9)"><h1>9</h1>الصف التاسع</div>
+        </div>
+
+        <!-- Updates Section -->
+        <div class="updates-container">
+            <div class="updates-header">
+                <i class="fas fa-bell" style="color: #FFE66D;"></i> تابع كل جديد هنا
+            </div>
+            <div class="updates-grid">
+                <a href="https://ghhjlp.my.canva.site/english-learning-games" target="_blank" class="update-card game-link">
+                    <i class="fas fa-gamepad"></i>
+                    <span>ألعاب تعليمية</span>
+                </a>
+                <a href="https://t.me/+afSETaZ232AzMmY0" target="_blank" class="update-card telegram-link">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>قناة التيلجرام</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div id="contentPage" class="page">
+        <div style="display:flex;justify-content:space-between;align-items:center;background:#fff;padding:10px;border-radius:15px;margin-bottom:15px">
+            <h2 id="gradeTitle" style="color:var(--dark)"></h2>
+            <button class="btn" onclick="goHome()">🏠 الرئيسية</button>
+        </div>
+        
+        <div class="week-scroll" id="weeksList"></div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="setTab(0, this)">كلمات</button>
+            <button class="tab-btn" onclick="setTab(1, this)">حلول</button>
+            <button class="tab-btn" onclick="setTab(2, this)">قواعد</button>
+            <button class="tab-btn" onclick="setTab(3, this)">ألعاب</button>
+        </div>
+
+        <!-- Panel 1: Vocab -->
+        <div id="panelVocab" class="page show">
+            <div class="audio-box">
+                <span>🔊 السرعة:</span>
+                <input type="range" class="speed-slider" min="0.5" max="1.5" step="0.1" value="1" oninput="updateSpeed(this.value)">
+                <span class="speed-val">1.0x</span>
+                <button class="btn" style="padding:2px 8px;font-size:0.7rem;margin-right:auto" onclick="toggleAutoSpeak()" id="autoSpeakBtn">نطق تلقائي: OFF</button>
+            </div>
+            <div class="vocab-grid" id="vocabList"></div>
+        </div>
+        
+        <!-- Panel 2: Solutions -->
+        <div id="panelSolutions" class="page">
+            <div id="solutionsContent" style="text-align:center"></div>
+        </div>
+
+        <!-- Panel 3: Grammar -->
+        <div id="panelGrammar" class="page">
+            <div id="grammarContent" class="grammar-container" style="background:#fff;padding:20px;border-radius:15px;line-height:1.6"></div>
+        </div>
+
+        <!-- Panel 4: Games Menu -->
+        <div id="panelGames" class="page">
+            <div class="grades-grid">
+                <div class="grade-card" onclick="startGame('match')">📸<br>مطابقة الصور</div>
+                <div class="grade-card" onclick="startGame('listen')">🎧<br>استمع واختر</div>
+                <div class="grade-card" onclick="startGame('scramble')">🔤<br>ترتيب الحروف</div>
+            </div>
+        </div>
+
+        <!-- Active Game Area -->
+        <div id="activeGame" class="page">
+            <div class="game-area" id="gameAreaContent"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="social-links">
+        <a href="https://facebook.com/Dreamer231" target="_blank" class="fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://t.me/anwermes" target="_blank" class="tg"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://wa.me/970599160308" target="_blank" class="wa"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="copyright">© 2025 English For Grade 5-9 | المعلم أنور عايش مسمح</div>
+    <div style="margin-top:15px; font-size:0.8rem">
+        <a onclick="resetApp()" style="color:#aaa; cursor:pointer">إعادة ضبط التطبيق ⚙️</a>
+    </div>
+</footer>
+
+<!-- Feedback Popup -->
+<div id="fbPopup" class="feedback-popup">
+    <div style="font-size:3rem">⭐</div>
+    <h2 id="fbTitle">ممتاز!</h2>
+</div>
+
+<!-- Shop Modal -->
+<div id="shopModal" class="modal">
+    <div class="modal-content">
+        <h3>🛍️ المتجر</h3>
+        <p>نقاطك: <span id="shopPts" style="color:gold;font-weight:bold"></span></p>
+        <div class="avatar-grid" id="avatarList"></div>
+        <button class="btn" style="margin-top:20px;width:100%" onclick="document.getElementById('shopModal').style.display='none'">إغلاق</button>
+    </div>
+</div>
+
+<script>
+// --- DATA ---
+var vocabDB = {
+    5: {
+         1: [
+             {en:"Arabic", ar:"اللغة العربية", img:"Arabic.jpg", pro:"/ˈærəbɪk/"},
+             {en:"English", ar:"اللغة الإنجليزية", img:"English.jpg", pro:"/ˈɪŋɡlɪʃ/"},
+             {en:"Maths", ar:"الرياضيات", img:"Maths .jpg", pro:"/mæθs/"},
+             {en:"PE", ar:"التربية الرياضية", img:"PE.png", pro:"/ˌpiː ˈiː/"},
+             {en:"Science", ar:"العلوم", img:"science.jpg", pro:"/ˈsaɪəns/"}
+         ],
+         2: [
+             {en:"Art", ar:"فن / رسم", img:"art.webp", pro:"/ɑːrt/"},
+             {en:"Cinema", ar:"سينما", img:"cinema.jpeg", pro:"/ˈsɪnəmə/"},
+             {en:"Class", ar:"صف / حصة", img:"class.jpg", pro:"/klæs/"},
+             {en:"Email", ar:"بريد إلكتروني", img:"email.png", pro:"/ˈiːmeɪl/"},
+             {en:"Film", ar:"فيلم", img:"film.jpeg", pro:"/fɪlm/"},
+             {en:"Internet", ar:"إنترنت", img:"internet.jpeg", pro:"/ˈɪntərnet/"},
+             {en:"Parents", ar:"الوالدين", img:"parents.jpeg", pro:"/ˈperənts/"},
+             {en:"Race", ar:"سباق", img:"race.jpg", pro:"/reɪs/"},
+             {en:"Twin", ar:"توأم", img:"twin.jpeg", pro:"/twɪn/"},
+             {en:"Work", ar:"عمل", img:"work.webp", pro:"/wɜːrk/"}
+         ],
+         4: [
+             {en:"Boat", ar:"قارب", img:"boat.jpeg", pro:"/boʊt/"},
+             {en:"Building", ar:"مبنى", img:"building.png", pro:"/ˈbɪldɪŋ/"},
+             {en:"Cable car", ar:"تلفريك", img:"cable car.jpeg", pro:"/ˈkeɪbl kɑːr/"},
+             {en:"Famous", ar:"مشهور", img:"famous.jpeg", pro:"/ˈfeɪməs/"},
+             {en:"Father", ar:"أب", img:"father.jpeg", pro:"/ˈfɑːðər/"},
+             {en:"Hiking", ar:"المشي الجبلي", img:"hiking.jpeg", pro:"/ˈhaɪkɪŋ/"},
+             {en:"Mother", ar:"أم", img:"mother.jpeg", pro:"/ˈmʌðər/"},
+             {en:"People", ar:"ناس", img:"people.jpg", pro:"/ˈpiːpl/"},
+             {en:"Photo", ar:"صورة", img:"photo.webp", pro:"/ˈfoʊtoʊ/"},
+             {en:"Stadium", ar:"ملعب / استاد", img:"stadium.jpg", pro:"/ˈsteɪdiəm/"},
+             {en:"Valley", ar:"وادي", img:"valley.jpeg", pro:"/ˈvæli/"},
+             {en:"Wheel", ar:"عجلة / دولاب الهواء", img:"wheel.jpeg", pro:"/wiːl/"}
+         ],
+         6: [
+             {en:"Hopping", ar:"القفز (على رجل واحدة)", img:"hopping.png", pro:"/ˈhɑːpɪŋ/"},
+             {en:"Jumping", ar:"القفز", img:"jumping.jpeg", pro:"/ˈdʒʌmpɪŋ/"},
+             {en:"Running", ar:"الجري", img:"running.jpeg", pro:"/ˈrʌnɪŋ/"},
+             {en:"Skipping", ar:"نط الحبل", img:"skipping.jpeg", pro:"/ˈskɪpɪŋ/"},
+             {en:"Swimming", ar:"السباحة", img:"swimming.jpeg", pro:"/ˈswɪmɪŋ/"}
+         ],
+         8: [
+             {en:"Cold", ar:"بارد", img:"cold.jpeg", pro:"/koʊld/"},
+             {en:"Hot", ar:"حار", img:"hot.jpeg", pro:"/hɑːt/"},
+             {en:"Rainy", ar:"ممطر", img:"rainy.jpeg", pro:"/ˈreɪni/"},
+             {en:"Snowy", ar:"مثلج", img:"snowy.jpeg", pro:"/ˈsnoʊi/"},
+             {en:"Windy", ar:"عاصف", img:"windy.jpeg", pro:"/ˈwɪndi/"}
+         ]
+    },
+    6: {
+        1: [
+            {en:"Accident", ar:"حادث", img:"accident.jpeg", pro:"/ˈæksɪdənt/"},
+            {en:"Awful", ar:"فظيع / سيء جداً", img:"awful.webp", pro:"/ˈɔːfl/"},
+            {en:"Bang", ar:"ارتطام / صوت خبطة", img:"bang.jpg", pro:"/bæŋ/"},
+            {en:"Call", ar:"يتصل / ينادي", img:"call.jpg", pro:"/kɔːl/"},
+            {en:"Crash", ar:"يتحطم / يصطدم", img:"crash.webp", pro:"/kræʃ/"},
+            {en:"Fall", ar:"يسقط", img:"fall.gif", pro:"/fɔːl/"},
+            {en:"Miss", ar:"يفتقد / يخطئ", img:"miss.avif", pro:"/mɪs/"},
+            {en:"Stairs", ar:"درج / سلالم", img:"stairs.jpeg", pro:"/sterz/"},
+            {en:"Still", ar:"لا يزال / ساكن", img:"still.jpg", pro:"/stɪl/"},
+            {en:"Summer camp", ar:"مخيم صيفي", img:"summer camp.jpeg", pro:"/ˈsʌmər kæmp/"},
+            {en:"Tired", ar:"متعب", img:"tired.jpeg", pro:"/ˈtaɪərd/"},
+            {en:"Welcome back", ar:"أهلاً بعودتك", img:"welcome back.webp", pro:"/ˌwelkəm ˈbæk/"}
+        ],
+        2: [
+            {en:"Anyone", ar:"أي شخص", img:"anyone.png", pro:"/ˈeniwʌn/"},
+            {en:"Argue", ar:"يجادل", img:"argue.jpeg", pro:"/ˈɑːrɡjuː/"},
+            {en:"Cry", ar:"يبكي", img:"cry.jpeg", pro:"/kraɪ/"},
+            {en:"Give back", ar:"يعيد (الشيء)", img:"give back.jpeg", pro:"/ɡɪv bæk/"},
+            {en:"Go away", ar:"يذهب بعيداً", img:"Go away.webp", pro:"/ɡoʊ əˈweɪ/"},
+            {en:"Invite", ar:"يدعو", img:"invite.jpg", pro:"/ɪnˈvaɪt/"},
+            {en:"Lend", ar:"يقرض / يعير", img:"lend.jpeg", pro:"/lend/"},
+            {en:"Problem", ar:"مشكلة", img:"problem.jpeg", pro:"/ˈprɒbləm/"},
+            {en:"Quiz", ar:"اختبار قصير", img:"quiz.jpg", pro:"/kwɪz/"},
+            {en:"Share", ar:"يشارك", img:"share.jpg", pro:"/ʃer/"},
+            {en:"Someone", ar:"شخص ما", img:"someone.jpg", pro:"/ˈsʌmwʌn/"},
+            {en:"Understand", ar:"يفهم", img:"understand.jpeg", pro:"/ˌʌndərˈstænd/"}
+        ],
+        4: [
+            {en:"Adventure", ar:"مغامرة", img:"adventure.jpeg", pro:"/ədˈventʃər/"},
+            {en:"Burst", ar:"ينفجر", img:"burst.jpeg", pro:"/bɜːrst/"},
+            {en:"Chase", ar:"يطارد", img:"chase.jpeg", pro:"/tʃeɪs/"},
+            {en:"Eighteenth", ar:"الثامن عشر (18)", img:"eighteenth.jpeg", pro:"/ˌeɪˈtiːnθ/"},
+            {en:"Fifteenth", ar:"الخامس عشر (15)", img:"fifteenth.jpeg", pro:"/ˌfɪfˈtiːnθ/"},
+            {en:"Fourteenth", ar:"الرابع عشر (14)", img:"fourteenth.jpeg", pro:"/ˌfɔːrˈtiːnθ/"},
+            {en:"Nineteenth", ar:"التاسع عشر (19)", img:"nineteenth.jpeg", pro:"/ˌnaɪnˈtiːnθ/"},
+            {en:"Seventeenth", ar:"السابع عشر (17)", img:"seventeenth.jpeg", pro:"/ˌsevənˈtiːnθ/"},
+            {en:"Sixteenth", ar:"السادس عشر (16)", img:"sixteenth.jpeg", pro:"/ˌsɪksˈtiːnθ/"},
+            {en:"Thirteenth", ar:"الثالث عشر (13)", img:"thirteenth.jpeg", pro:"/ˌθɜːrˈtiːnθ/"},
+            {en:"Thirtieth", ar:"الثلاثون (30)", img:"thirtieth.jpeg", pro:"/ˈθɜːrtiəθ/"},
+            {en:"Turn over", ar:"يقلب (الصفحة)", img:"turn over.jpeg", pro:"/tɜːrn ˈoʊvər/"},
+            {en:"Twentieth", ar:"العشرون (20)", img:"twentieth.jpeg", pro:"/ˈtwentiəθ/"},
+            {en:"Twenty-first", ar:"الحادي والعشرون (21)", img:"twenty first.png", pro:"/ˌtwenti ˈfɜːrst/"}
+        ],
+        6: [
+            {en:"Attack", ar:"يهاجم", img:"attack.jpg", pro:"/əˈtæk/"},
+            {en:"Diver", ar:"غواص", img:"diver.jpg", pro:"/ˈdaɪvər/"},
+            {en:"Funny", ar:"مضحك", img:"funny.jpg", pro:"/ˈfʌni/"},
+            {en:"Mouse", ar:"فأر", img:"mouse.jpg", pro:"/maʊs/"},
+            {en:"Noise", ar:"ضجيج / إزعاج", img:"noise.jpg", pro:"/nɔɪz/"},
+            {en:"Other", ar:"آخر", img:"other.jpg", pro:"/ˈʌðər/"},
+            {en:"Ox", ar:"ثور", img:"ox.jpg", pro:"/ɑːks/"}, 
+            {en:"Push", ar:"يدفع", img:"push.jpg", pro:"/pʊʃ/"},
+            {en:"Safe", ar:"آمن", img:"safe.jpg", pro:"/seɪf/"},
+            {en:"Together", ar:"معاً", img:"together.jpg", pro:"/təˈɡeðər/"},
+            {en:"While", ar:"بينما", img:"while.png", pro:"/waɪl/"}
+        ],
+        8: [
+            {en:"Burger", ar:"برجر", img:"burger.jpg", pro:"/ˈbɜːrɡər/"},
+            {en:"Prefer", ar:"يفضل", img:"prefer.jpg", pro:"/prɪˈfɜːr/"},
+            {en:"A little", ar:"قليل", img:"a little.jpg", pro:"/ə ˈlɪtl/"},
+            {en:"Bottom", ar:"أسفل", img:"bottom.jpg", pro:"/ˈbɑːtəm/"},
+            {en:"Fizzy drink", ar:"مشروب غازي", img:"fizzy drink.jpg", pro:"/ˈfɪzi drɪŋk/"},
+            {en:"Food pyramid", ar:"الهرم الغذائي", img:"food pyramid.jpg", pro:"/fuːd ˈpɪrəmɪd/"},
+            {en:"Fried", ar:"مقلي", img:"fried.jpg", pro:"/fraɪd/"},
+            {en:"Good advice", ar:"نصيحة جيدة", img:"good advice.jpg", pro:"/ɡʊd ədˈvaɪs/"},
+            {en:"Should", ar:"يجب / ينبغي", img:"should.jpg", pro:"/ʃʊd/"},
+            {en:"Soup", ar:"حساء / شوربة", img:"soup.jpg", pro:"/suːp/"},
+            {en:"Sweet", ar:"حلوى", img:"sweet.jpg", pro:"/swiːt/"},
+            {en:"Top", ar:"قمة / أعلى", img:"top.jpg", pro:"/tɑːp/"}
+        ]
+    },
+    7: {
+        2: [
+            {en:"Always", ar:"دائماً", img:"always.jpg", pro:"/ˈɔːlweɪz/"},
+            {en:"Nurse", ar:"ممرضة", img:"nurse.jpg", pro:"/nɜːrs/"},
+            {en:"Usually", ar:"عادةً", img:"usually.jpg", pro:"/ˈjuːʒuəli/"},
+            {en:"Sometimes", ar:"أحياناً", img:"sometimes.jpg", pro:"/ˈsʌmtaɪmz/"},           
+            {en:"Often", ar:"غالبا", img:"often.jpg", pro:"/ɔːfn/"},              
+            {en:"Every", ar:"كل", img:"every.jpg", pro:"/ˈevri/"}
+        ],
+        3: [
+            {en:"Email", ar:"بريد إلكتروني", img:"email.jpg", pro:"/ˈiːmeɪl/"},
+            {en:"Dear", ar:"عزيزي", img:"dear.jpg", pro:"/dɪr/"}
+        ],
+        5: [
+            {en:"Now", ar:"الآن", img:"now.jpg", pro:"/naʊ/"},
+            {en:"Listen", ar:"استمع", img:"listen.jpg", pro:"/ˈlɪsn/"}
+        ],
+        7: [
+            {en:"Feel", ar:"يشعر", img:"feel.jpg", pro:"/fiːl/"},
+            {en:"Smell", ar:"يشم / رائحة", img:"smell.jpg", pro:"/smel/"}
+        ],
+        8: [
+            {en:"Address", ar:"عنوان", img:"address.jpg", pro:"/əˈdres/"},
+            {en:"Chat", ar:"دردشة", img:"chat.jpg", pro:"/tʃæt/"}
+        ]
+    },
+    8: {
+        1: [
+            {en:"Channel", ar:"قناة", img:"channel.png", pro:"/ˈtʃænəl/"},
+            {en:"Dining room", ar:"غرفة الطعام", img:"dining room.jpg", pro:"/ˈdaɪnɪŋ ruːm/"},
+            {en:"Documentary", ar:"فيلم وثائقي", img:"documentary.jpg", pro:"/ˌdɒkjuˈmentəri/"},
+            {en:"Dry", ar:"جاف", img:"Dry.jpeg", pro:"/draɪ/"},
+            {en:"Family", ar:"عائلة", img:"family.jpg", pro:"/ˈfæməli/"},
+            {en:"Forecast", ar:"توقعات الطقس", img:"forecast.jpg", pro:"/ˈfɔːrkæst/"},
+            {en:"Go online", ar:"يتصل بالإنترنت", img:"go online.jpg", pro:"/ɡoʊ ˈɒnlaɪn/"},
+            {en:"Grandma", ar:"جدة", img:"grandma.jpg", pro:"/ˈɡrænmɑː/"},
+            {en:"Hall", ar:"صالة / ردهة", img:"hall.jpg", pro:"/hɔːl/"},
+            {en:"Hurricane", ar:"إعصار", img:"hurricane.jpg", pro:"/ˈhʌrɪkeɪn/"},
+            {en:"In time", ar:"في الوقت المناسب", img:"in time.png", pro:"/ɪn taɪm/"},
+            {en:"Information", ar:"معلومات", img:"information.jpg", pro:"/ˌɪnfərˈmeɪʃən/"},
+            {en:"Landline", ar:"هاتف أرضي", img:"landline.jpg", pro:"/ˈlændlaɪn/"},
+            {en:"Mrs", ar:"السيدة", img:"mrs.jpg", pro:"/ˈmɪsɪz/"},
+            {en:"Nationality", ar:"جنسية", img:"nationality.jpg", pro:"/ˌnæʃəˈnæləti/"},
+            {en:"On the phone", ar:"على الهاتف", img:"on the phone.jpg", pro:"/ɒn ðə foʊn/"},
+            {en:"Project", ar:"مشروع", img:"project.jpg", pro:"/ˈprɒdʒekt/"},
+            {en:"Serious", ar:"جاد / خطير", img:"serious.jpg", pro:"/ˈsɪriəs/"},
+            {en:"Special", ar:"خاص / مميز", img:"special.jpg", pro:"/ˈspeʃəl/"},
+            {en:"Speed", ar:"سرعة", img:"speed.jpg", pro:"/spiːd/"},
+            {en:"Wall", ar:"جدار / حائط", img:"wall.jpg", pro:"/wɔːl/"},
+            {en:"Wardrobe", ar:"خزانة ملابس", img:"wardrobe.jpg", pro:"/ˈwɔːrdroʊb/"},
+            {en:"Wet", ar:"مبلل / رطب", img:"wet.jpg", pro:"/wet/"}
+        ],
+        3: [
+            {en:"Always", ar:"دائماً", img:"always.jpg", pro:"/ˈɔːlweɪz/"},
+            {en:"Usually", ar:"عادةً", img:"usually.jpg", pro:"/ˈjuːʒuəli/"},
+            {en:"Often", ar:"غالباً", img:"often.jpg", pro:"/ˈɔːfn/"},
+            {en:"Sometimes", ar:"أحياناً", img:"sometimes.jpg", pro:"/ˈsʌmtaɪmz/"},
+            {en:"Never", ar:"أبداً", img:"never.jpg", pro:"/ˈnevər/"},
+            {en:"Every", ar:"كل", img:"every.jpg", pro:"/ˈevri/"},
+            {en:"Fact", ar:"حقيقة", img:"fact.jpg", pro:"/fækt/"},
+            {en:"Habit", ar:"عادة", img:"habit.jpg", pro:"/ˈhæbɪt/"},
+            {en:"Routine", ar:"روتين", img:"routine.jpg", pro:"/ruːˈtiːn/"},
+            {en:"Now", ar:"الآن", img:"now.jpg", pro:"/naʊ/"},
+            {en:"Look", ar:"انظر", img:"look.jpg", pro:"/lʊk/"},
+            {en:"Listen", ar:"استمع", img:"listen.jpg", pro:"/ˈlɪsn/"}
+        ],
+        5: [
+            {en:"Age", ar:"عمر", img:"age.jpg", pro:"/eɪdʒ/"},
+            {en:"Culture", ar:"ثقافة", img:"culture.jpg", pro:"/ˈkʌltʃər/"},
+            {en:"Guitar", ar:"جيتار", img:"guitar.jpg", pro:"/ɡɪˈtɑːr/"},
+            {en:"Pizza", ar:"بيتزا", img:"pizza.jpg", pro:"/ˈpiːtsə/"},
+            {en:"Poem", ar:"قصيدة", img:"poem.jpg", pro:"/ˈpoʊəm/"},
+            {en:"Folk song", ar:"أغنية شعبية", img:"folk song.jpg", pro:"/foʊk sɔːŋ/"},
+            {en:"Instrument", ar:"آلة موسيقية", img:"instrument.jpg", pro:"/ˈɪnstrəmənt/"},
+            {en:"Used to", ar:"اعتاد أن", img:"used to.jpg", pro:"/ˈjuːst tuː/"}
+        ],
+        7: [
+            {en:"Feel", ar:"يشعر", img:"feel.jpg", pro:"/fiːl/"},
+            {en:"Look", ar:"يبدو", img:"look.jpg", pro:"/lʊk/"},
+            {en:"Smell", ar:"رائحة", img:"smell.jpg", pro:"/smel/"},
+            {en:"Sound", ar:"صوت", img:"sound.jpg", pro:"/saʊnd/"},
+            {en:"Taste", ar:"طعم", img:"taste.jpg", pro:"/teɪst/"},
+            {en:"Need", ar:"يحتاج", img:"need.jpg", pro:"/niːd/"},
+            {en:"Can", ar:"يستطيع", img:"can.jpg", pro:"/kæn/"},
+            {en:"Could", ar:"استطاع", img:"could.jpg", pro:"/kʊd/"},
+            {en:"Watch", ar:"يشاهد", img:"watch.jpg", pro:"/wɑːtʃ/"}
+        ],
+        8: [
+            {en:"Paris", ar:"باريس", img:"paris.jpg", pro:"/ˈpærɪs/"},
+            {en:"Radio", ar:"راديو", img:"radio.jpg", pro:"/ˈreɪdioʊ/"}
+        ]
+    },
+    9: {
+        1: [
+            {en:"Airport", ar:"مطار", img:"airport.jpg", pro:"/ˈerpɔːrt/"},
+            {en:"Attendant", ar:"مضيف / مرافق", img:"attendent.jpeg", pro:"/əˈtendənt/"},
+            {en:"Captain", ar:"قبطان / كابتن", img:"captain.jpeg", pro:"/ˈkæptɪn/"},
+            {en:"Community", ar:"مجتمع", img:"community.jpeg", pro:"/kəˈmjuːnəti/"},
+            {en:"Cooking", ar:"طبخ", img:"cooking.jpeg", pro:"/ˈkʊkɪŋ/"},
+            {en:"Damascus Gate", ar:"باب العمود", img:"damascus gate.jpeg", pro:"/dəˈmæskəs ɡeɪt/"},
+            {en:"Gate", ar:"بوابة", img:"gate.png", pro:"/ɡeɪt/"},
+            {en:"Guide", ar:"مرشد", img:"guide.jpeg", pro:"/ɡaɪd/"},
+            {en:"Land", ar:"يهبط", img:"land.jpeg", pro:"/lænd/"},
+            {en:"Landing card", ar:"بطاقة هبوط", img:"landing card.jpg", pro:"/ˈlændɪŋ kɑːrd/"},
+            {en:"Local", ar:"محلي", img:"local.jpeg", pro:"/ˈloʊkl/"},
+            {en:"Mini-bus", ar:"حافلة صغيرة", img:"mini-bus.jpeg", pro:"/ˈmɪni bʌs/"},
+            {en:"Museum", ar:"متحف", img:"museum.jpeg", pro:"/mjuˈziːəm/"},
+            {en:"Passport", ar:"جواز سفر", img:"passport.jpeg", pro:"/ˈpæspɔːrt/"},
+            {en:"Religious", ar:"ديني", img:"religious.jpg", pro:"/rɪˈlɪdʒəs/"},
+            {en:"Right now", ar:"الآن / فوراً", img:"right now.png", pro:"/raɪt naʊ/"},
+            {en:"Schedule", ar:"جدول مواعيد", img:"schedule.jpeg", pro:"/ˈskedʒuːl/"},
+            {en:"Site", ar:"موقع / مكان", img:"site.jpeg", pro:"/saɪt/"},
+            {en:"Take off", ar:"يقلع (للطائرة)", img:"take off.png", pro:"/teɪk ɔːf/"},
+            {en:"Through", ar:"عبر / خلال", img:"through.jpeg", pro:"/θruː/"},
+            {en:"Village", ar:"قرية", img:"village.jpeg", pro:"/ˈvɪlɪdʒ/"}
+        ],
+        2: [
+            {en:"Away", ar:"بعيداً، غائباً", img:"away.jpg", pro:"/əˈweɪ/"},
+            {en:"Continue", ar:"يستمر، يواصل", img:"continue.jpeg", pro:"/kənˈtɪnjuː/"},
+            {en:"Dry", ar:"جاف، يجفف", img:"dry.jpeg", pro:"/draɪ/"},
+            {en:"Keep out", ar:"منع الدخول", img:"keep out.png", pro:"/kiːp aʊt/"},
+            {en:"Relax", ar:"يسترخي، يستريح", img:"relax.jpg", pro:"/rɪˈlæks/"},
+            {en:"Put up", ar:"يثبت، ينصب", img:"put up.jpg", pro:"/pʊt ʌp/"},
+            {en:"Wet", ar:"مبلل، يبلل", img:"wet.jpg", pro:"/wet/"},
+            {en:"Carpet", ar:"سجادة", img:"carpet.jpg", pro:"/ˈkɑːpɪt/"},
+            {en:"Curtain", ar:"ستارة", img:"curtain.jpeg", pro:"/ˈkɜːtən/"},
+            {en:"Dining room", ar:"غرفة الطعام", img:"dining room.jpg", pro:"/ˈdaɪnɪŋ ruːm/"},
+            {en:"Hall", ar:"ردهة، مدخل", img:"hall.jpg", pro:"/hɔːl/"},
+            {en:"Wall", ar:"حائط، جدار", img:"wall.jpg", pro:"/wɔːl/"},
+            {en:"Wardrobe", ar:"خزانة ملابس", img:"wardrobe.jpg", pro:"/ˈwɔːrdroʊb/"},
+            {en:"In time", ar:"في الوقت المناسب", img:"in time.jpg", pro:"/ɪn taɪm/"},
+            {en:"Special", ar:"خاص، مميز", img:"special.jpg", pro:"/ˈspeʃəl/"}
+        ]
+    }
+};
+
+// 🔥🔥🔥 NEW GRAMMAR DATABASE 🔥🔥🔥
+var grammarDB = {
+    6: {
+        3: `<h3>🕐 زمن الماضي البسيط (Simple Past)</h3>
+            <div class="rule-box">
+                <h4>الاستخدام:</h4>
+                <p>يُستخدم للحديث عن فعل بدأ وانتهى في الماضي.</p>
+            </div>
+            <div class="rule-box">
+                <h4>أ. تكوين الفعل:</h4>
+                <p><strong>1. منتظمة (Regular):</strong> نضيف ed</p>
+                <div class="example-box">Live → Lived | Play → Played</div>
+                <p style="margin-top:15px"><strong>2. غير منتظمة (Irregular):</strong> تُحفظ كما هي</p>
+                <div class="example-box">Go → Went | See → Saw | Eat → Ate</div>
+            </div>
+            <div class="rule-box">
+                <h4>ب. فعل الكينونة (To Be):</h4>
+                <p>• Was ← للمفرد (I, He, She, It)</p>
+                <p>• Were ← للجمع (We, You, They)</p>
+            </div>
+            <div class="rule-box">
+                <h4>ج. الكلمات المفتاحية:</h4>
+                <p>Yesterday (أمس) • Last week (الأسبوع الماضي) • Ago (منذ) • In 2020</p>
+            </div>
+            <div class="rule-box">
+                <h4>د. النفي:</h4>
+                <p>Didn't + الفعل المجرد</p>
+                <div class="example-box">She didn't go to the park.</div>
+            </div>
+            <div class="rule-box">
+                <h4>هـ. السؤال:</h4>
+                <p>Did + الفاعل + الفعل المجرد؟</p>
+                <div class="example-box">Did she go to the park?</div>
+            </div>
+            <div class="rule-box">
+                <h4>🔗 أداة الربط "but":</h4>
+                <p>تعني "لكن"، وتربط جملتين متناقضتين.</p>
+                <div class="example-box">I was sick, but I went to school.</div>
+            </div>`,
+        
+        5: `<h3>⏳ الماضي المستمر (Past Continuous)</h3>
+            <div class="rule-box">
+                <h4>الاستخدام:</h4>
+                <p>وصف حدث كان مستمراً في وقت محدد في الماضي.</p>
+            </div>
+            <div class="rule-box">
+                <h4>التكوين:</h4>
+                <p>Subject + was/were + verb-ing</p>
+                <p>• Was ← I / He / She / It</p>
+                <p>• Were ← You / We / They</p>
+                <div class="example-box">I was sleeping at 10 PM.</div>
+                <div class="example-box">They were eating dinner.</div>
+            </div>
+            <div class="rule-box">
+                <h4>🔗 When vs While:</h4>
+                <p><strong>While (بينما):</strong> يأتي بعدها ماضي مستمر (الحدث الطويل)</p>
+                <div class="example-box">While we were watching TV, the phone rang.</div>
+                <p style="margin-top:15px"><strong>When (عندما):</strong> يأتي بعدها ماضي بسيط (الحدث القاطع)</p>
+                <div class="example-box">When my friend came, I was eating.</div>
+            </div>
+            <div class="rule-box">
+                <h4>💡 ملخص:</h4>
+                <p>• While ← تحب الـ ing (المستمر)</p>
+                <p>• When ← تحب الماضي البسيط</p>
+            </div>`
+    },
+    7: {
+        2: `<h3>☀️ المضارع البسيط (Present Simple)</h3>
+            <div class="rule-box">
+                <h4>الاستخدام:</h4>
+                <p>• العادات والروتين</p>
+                <p>• الحقائق العلمية</p>
+                <div class="example-box">Doctors work long hours.</div>
+                <div class="example-box">The sun rises in the east.</div>
+            </div>
+            <div class="rule-box">
+                <h4>📏 قاعدة الفعل:</h4>
+                <p><strong>He / She / It:</strong> نضيف s أو es</p>
+                <div class="example-box">She plays tennis. | He watches TV.</div>
+                <p style="margin-top:10px"><strong>I / We / You / They:</strong> فعل مجرد بدون إضافة</p>
+                <div class="example-box">They play football.</div>
+            </div>
+            <div class="rule-box">
+                <h4>⏱️ ظروف التكرار (Adverbs of Frequency):</h4>
+                <p>Always (100%) → Usually → Often → Sometimes → Never (0%)</p>
+                <p style="margin-top:10px"><strong>📍 الموقع:</strong></p>
+                <p>• قبل الفعل الرئيسي: Ahmed sometimes sleeps early.</p>
+                <p>• بعد فعل الكينونة: He is never bored.</p>
+            </div>
+            <div class="rule-box">
+                <h4>🚫 النفي والسؤال:</h4>
+                <p><strong>النفي:</strong> don't / doesn't + فعل مجرد</p>
+                <div class="example-box">She doesn't like coffee.</div>
+                <p style="margin-top:10px"><strong>السؤال:</strong> Do / Does + فاعل + فعل مجرد؟</p>
+                <div class="example-box">Does she play tennis?</div>
+            </div>`,
+        
+        3: `<h3>💌 كتابة الإيميل الودي (Friendly Email)</h3>
+            <div class="rule-box">
+                <h4>1. الرأس (Header):</h4>
+                <p>• To: بريد صديقك</p>
+                <p>• From: بريدك الخاص</p>
+                <p>• Date: التاريخ</p>
+            </div>
+            <div class="rule-box">
+                <h4>2. التحية (Greeting):</h4>
+                <div class="example-box">Hi Reem, / Dear Ali,</div>
+                <p>يمكن إضافة: It was nice to get your email...</p>
+            </div>
+            <div class="rule-box">
+                <h4>3. الموضوع (Body):</h4>
+                <p>• عرّف بنفسك (Name, Age, School)</p>
+                <p>• اسأل صديقك أسئلة</p>
+                <div class="example-box">Do you have brothers or sisters?</div>
+            </div>
+            <div class="rule-box">
+                <h4>4. الخاتمة (Closing):</h4>
+                <div class="example-box">Please write soon! / Write back!</div>
+                <p>التوقيع: Best wishes, Mona</p>
+            </div>`,
+        
+        5: `<h3>🏃 المضارع المستمر (Present Continuous)</h3>
+            <div class="rule-box">
+                <h4>الاستخدام:</h4>
+                <p>حدث يحدث الآن (Now) أو حول هذه الفترة</p>
+            </div>
+            <div class="rule-box">
+                <h4>التكوين:</h4>
+                <div class="example-box">am / is / are + Verb-ing</div>
+                <p>• I → am</p>
+                <p>• He/She/It → is</p>
+                <p>• We/You/They → are</p>
+                <div class="example-box">I am studying now.</div>
+                <div class="example-box">She is reading a book.</div>
+            </div>
+            <div class="rule-box">
+                <h4>الكلمات الدالة:</h4>
+                <p>Now, At the moment, Look!, Listen!, Right now</p>
+            </div>`,
+        
+        7: `<h3>🛑 أفعال الحالة (Stative Verbs)</h3>
+            <div class="rule-box" style="border-color:#ff6b9d">
+                <h4>🌟 القاعدة الذهبية:</h4>
+                <p style="font-size:1.1rem;font-weight:bold">هذه الأفعال تأتي دائماً في المضارع البسيط ولا تأخذ -ing أبداً!</p>
+            </div>
+            <div class="rule-box">
+                <h4>1. المشاعر والاحتياجات:</h4>
+                <p>Love, Like, Need, Want, Believe</p>
+                <div class="example-box">❌ I am loving Palestine.</div>
+                <div class="example-box">✅ I love Palestine.</div>
+            </div>
+            <div class="rule-box">
+                <h4>2. الأفكار والمعرفة:</h4>
+                <p>Know, Think, Understand, Remember</p>
+                <div class="example-box">❌ She is knowing the answer.</div>
+                <div class="example-box">✅ She knows the answer.</div>
+            </div>
+            <div class="rule-box">
+                <h4>3. الحواس والوصف:</h4>
+                <p>Smell, Taste, Look, Sound, Seem</p>
+                <div class="example-box">❌ The flower is smelling nice.</div>
+                <div class="example-box">✅ The flower smells nice.</div>
+            </div>`
+    },
+    8: {
+        3: `<h3>⚡ مقارنة: المضارع البسيط vs المستمر</h3>
+            <div class="rule-box">
+                <h4>المضارع البسيط (Simple):</h4>
+                <p>• للحقائق والعادات والروتين</p>
+                <p>• الكلمات: Always, Usually, Every day, Often</p>
+                <div class="example-box">I drink coffee every morning.</div>
+            </div>
+            <div class="rule-box">
+                <h4>المضارع المستمر (Continuous):</h4>
+                <p>• لما يحدث الآن أو مؤقتاً</p>
+                <p>• الكلمات: Now, At the moment, Right now, Look!</p>
+                <div class="example-box">I am drinking coffee now.</div>
+            </div>
+            <div class="rule-box" style="border-color:#ff6b9d">
+                <h4>⚠️ تذكر:</h4>
+                <p>أفعال الشعور (Like, Know, Want, Need) تأتي دائماً في البسيط ولا تأخذ ing.</p>
+            </div>`,
+        
+        4: `<h3>📧 كتابة إيميل (Email Writing)</h3>
+            <div class="rule-box">
+                <h4>1. البيانات (Header):</h4>
+                <p>• Sender: (اسمك)</p>
+                <p>• Receiver: (اسم الصديق)</p>
+                <p>• Topic/Subject: (الموضوع)</p>
+            </div>
+            <div class="rule-box">
+                <h4>2. الهيكل (Structure):</h4>
+                <p><strong>A. التحية:</strong> Dear Sama, / Hi Ahmed,</p>
+                <p><strong>B. المحتوى:</strong> عرّف بنفسك - اسأل صديقك</p>
+                <div class="example-box">I'm Abeer. I'm 14 years old. What do you like?</div>
+                <p><strong>C. الخاتمة:</strong> Please write back soon.</p>
+                <p><strong>D. التوقيع:</strong> Best wishes, Abeer</p>
+            </div>
+            <div class="rule-box">
+                <h4>💡 نصائح:</h4>
+                <p>• ابدأ بحرف كبير (Capital Letter)</p>
+                <p>• ضع علامات الترقيم (. ؟ !)</p>
+            </div>`,
+        
+        8: `<h3>📝 كتابة فقرة من ملاحظات</h3>
+            <div class="rule-box">
+                <h4>كيف تحول "كلمات" إلى "فقرة"؟</h4>
+                <p><strong>1. حوّل الملاحظة لجملة كاملة:</strong></p>
+                <p>Note: Paris: travelled</p>
+                <div class="example-box">He travelled to Paris.</div>
+            </div>
+            <div class="rule-box">
+                <h4>2. استخدم أدوات الربط:</h4>
+                <p>and, but, so, because, however</p>
+                <div class="example-box">He is from Gaza, but he lives in Dubai now.</div>
+            </div>
+            <div class="rule-box">
+                <h4>3. انتبه للزمن:</h4>
+                <p>• ماضي: Travelled, Visited, Won</p>
+                <p>• عادات قديمة: Used to + فعل مجرد</p>
+            </div>
+            <div class="rule-box">
+                <h4>مثال كامل:</h4>
+                <div class="example-box">Muhammad Assaf is a great singer. He is 30 years old. He is from Khan Yunis but he lives in Dubai now. He won Arab Idol.</div>
+            </div>`
+    },
+    9: {
+        5: `<h3>🔄 الماضي البسيط vs المضارع التام</h3>
+            <div class="rule-box">
+                <h4>1. الماضي البسيط (Past Simple):</h4>
+                <p>حدث وانتهى في الماضي</p>
+                <p><strong>Keywords:</strong> Yesterday, Last year, Ago, In the past, In 2020</p>
+                <div class="example-box">I visited London last year.</div>
+            </div>
+            <div class="rule-box">
+                <h4>2. المضارع التام (Present Perfect):</h4>
+                <p>حدث بدأ في الماضي وله أثر أو امتداد حتى الآن</p>
+                <p><strong>Form:</strong> Have/Has + Past Participle (التصريف الثالث)</p>
+                <div class="example-box">I have visited Paris. (في حياتي - التجربة)</div>
+                <div class="example-box">I have lived here for 3 years. (ولا زلت)</div>
+            </div>
+            <div class="rule-box" style="border-color:#ff6b9d">
+                <h4>🔑 For vs Since:</h4>
+                <p><strong>For (لمدة):</strong> تأتي بعدها مدة زمنية</p>
+                <div class="example-box">For 3 days, For a week, For 5 years</div>
+                <p style="margin-top:15px"><strong>Since (منذ):</strong> تأتي بعدها نقطة بداية</p>
+                <div class="example-box">Since 2010, Since Monday, Since I was young</div>
+            </div>`
+    }
+};
+
+// --- SETTINGS & STATE ---
+const avatars = [{id:'Felix', price:0}, {id:'Aneka', price:50}, {id:'Jocelyn', price:100}];
+let user = JSON.parse(localStorage.getItem('user')) || { pts: 0, avatars: ['Felix'], current: 'Felix' };
+let currG = 5, currW = 1, currentTabIdx = 0;
+let speechSettings = { rate: 1.0, auto: false };
+
+// --- INIT ---
+updateUserUI();
+
+// --- MAIN LOGIC ---
+function goHome() {
+    document.getElementById('contentPage').classList.remove('show');
+    document.getElementById('homePage').classList.add('show');
+}
+
+function loadGrade(g) {
+    currG = g; currW = 1; currentTabIdx = 0;
+    document.getElementById('gradeTitle').innerText = 'الصف ' + g;
+    document.getElementById('homePage').classList.remove('show');
+    document.getElementById('contentPage').classList.add('show');
+    
+    let html = '';
+    let weeks = (g===5)?8:12;
+    for(let i=1; i<=weeks; i++) {
+        html += `<div class="week-btn ${i===1?'active':''}" onclick="loadWeek(${i}, this)">${i}<br><small>أسبوع</small></div>`;
+    }
+    document.getElementById('weeksList').innerHTML = html;
+    loadWeek(1);
+}
+
+function loadWeek(w, btn) {
+    currW = w;
+    if(btn) {
+        document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+    
+    const path = (currG === 6) ? `grade6-${currW}` : `grade${currG}/week${currW}`;
+    const words = vocabDB[currG]?.[currW] || [];
+
+    // Vocab
+    if(words.length === 0) document.getElementById('vocabList').innerHTML = '<p>لا يوجد محتوى</p>';
+    else {
+        document.getElementById('vocabList').innerHTML = words.map(word => {
+            let safeEn = word.en.replace(/'/g, "\\'");
+            return `
+            <div class="vocab-card">
+                <img src="${path}/${word.img}" onerror="this.src='https://placehold.co/150?text=${safeEn}'">
+                <h3>${word.en}</h3>
+                <p>${word.ar}</p>
+                <div style="color:#888;font-size:0.8rem">${word.pro||''}</div>
+                <button class="btn" onclick="speak('${safeEn}')">🔊 استمع</button>
+            </div>`;
+        }).join('');
+        
+        // Auto Speak Logic
+        if(speechSettings.auto && words.length > 0) {
+            let delay = 0;
+            words.forEach(w => {
+                setTimeout(() => speak(w.en), delay);
+                delay += 2500;
+            });
+        }
+    }
+
+    // Solutions
+    document.getElementById('solutionsContent').innerHTML = `
+        <img src="${path}/card1.jpg" class="solution-img" onerror="this.style.display='none'">
+        <img src="${path}/card2.jpg" class="solution-img" onerror="this.style.display='none'">
+        <img src="${path}/card3.jpg" class="solution-img" onerror="this.style.display='none'">
+    `;
+
+    // Grammar
+    document.getElementById('grammarContent').innerHTML = grammarDB[currG]?.[currW] || '<div style="text-align:center;color:#777">لا توجد قواعد.</div>';
+    
+    // Refresh Tab View
+    setTab(currentTabIdx, document.querySelectorAll('.tab-btn')[currentTabIdx]);
+}
+
+function setTab(idx, btn) {
+    currentTabIdx = idx;
+    const tabs = ['panelVocab', 'panelSolutions', 'panelGrammar', 'panelGames'];
+    tabs.forEach((t, i) => {
+        document.getElementById(t).style.display = (i === idx) ? 'block' : 'none';
+    });
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+    document.getElementById('activeGame').style.display = 'none';
+}
+
+// --- AUDIO SYSTEM ---
+function speak(txt) {
+    if('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(txt);
+        u.lang = 'en-US';
+        u.rate = speechSettings.rate;
+        window.speechSynthesis.speak(u);
+    }
+}
+function updateSpeed(val) {
+    speechSettings.rate = val;
+    document.querySelectorAll('.speed-val').forEach(el => el.innerText = val + 'x');
+    document.querySelectorAll('.speed-slider').forEach(el => el.value = val);
+}
+function toggleAutoSpeak() {
+    speechSettings.auto = !speechSettings.auto;
+    document.getElementById('autoSpeakBtn').innerText = 'نطق تلقائي: ' + (speechSettings.auto ? 'ON' : 'OFF');
+    document.getElementById('autoSpeakBtn').style.background = speechSettings.auto ? '#2ecc71' : '#4ECDC4';
+}
+
+// --- GAMES LOGIC ---
+function startGame(type) {
+    const words = vocabDB[currG]?.[currW] || [];
+    if(words.length < 2) { alert('كلمات غير كافية!'); return; }
+    
+    document.getElementById('panelGames').style.display = 'none';
+    const area = document.getElementById('activeGame');
+    const content = document.getElementById('gameAreaContent');
+    area.style.display = 'block';
+    
+    const target = words[Math.floor(Math.random() * words.length)];
+    const path = (currG === 6) ? `grade6-${currW}` : `grade${currG}/week${currW}`;
+    const safeEn = target.en.replace(/'/g, "\\'");
+    
+    content.innerHTML = `
+        <div class="game-header">
+            <h3>لعبة ${type === 'listen' ? 'استمع واختر' : (type === 'match' ? 'المطابقة' : 'الترتيب')}</h3>
+            <button class="btn" style="background:#e74c3c" onclick="closeGame()">خروج</button>
+        </div>
+        <div id="gameBody"></div>
+    `;
+    
+    const body = document.getElementById('gameBody');
+
+    // 1. MATCH GAME
+    if(type === 'match') {
+        speak(target.en);
+        const opts = [target, ...words.filter(w=>w!==target).sort(()=>0.5-Math.random()).slice(0,3)].sort(()=>0.5-Math.random());
+        body.innerHTML = `
+            <h3>أين صورة: <span style="color:var(--primary)">${target.en}</span>؟</h3>
+            <div class="options-grid">
+                ${opts.map(o => `
+                    <div class="option-btn" onclick="checkAnswer(this, ${o.en === target.en}, 'match')">
+                        <img src="${path}/${o.img}" onerror="this.src='https://placehold.co/100?text=${o.en}'">
+                    </div>`).join('')}
+            </div>`;
+    } 
+    
+    // 2. LISTEN GAME
+    else if(type === 'listen') {
+        setTimeout(() => speak(target.en), 500); // Auto play
+        const opts = [target, ...words.filter(w=>w!==target).sort(()=>0.5-Math.random()).slice(0,3)].sort(()=>0.5-Math.random());
+        
+        body.innerHTML = `
+            <div class="audio-box" style="margin-bottom:20px">
+                <span>🔊 سرعة الصوت:</span>
+                <input type="range" class="speed-slider" min="0.5" max="1.5" step="0.1" value="${speechSettings.rate}" oninput="updateSpeed(this.value)">
+                <span class="speed-val">${speechSettings.rate}x</span>
+            </div>
+
+            <div onclick="speak('${safeEn}')" class="listen-icon">🔊</div>
+            <p>اضغط للاستماع مجدداً</p>
+            <div class="options-grid">
+                ${opts.map(o => `
+                    <button class="option-btn" onclick="checkAnswer(this, ${o.en === target.en}, 'listen')">
+                        ${o.en}
+                    </button>`).join('')}
+            </div>`;
+    }
+    
+    // 3. SCRAMBLE GAME
+    else if(type === 'scramble') {
+        speak(target.en);
+        const letters = target.en.replace(/\s/g,'').split('').sort(()=>0.5-Math.random());
+        body.innerHTML = `
+            <img src="${path}/${target.img}" style="width:150px;height:150px;object-fit:contain">
+            <div id="ans" style="background:#eee;padding:10px;margin:10px 0;font-size:1.5rem;letter-spacing:3px;min-height:40px;border-radius:10px"></div>
+            <div>
+                ${letters.map(l => `<button class="btn" style="margin:2px" onclick="document.getElementById('ans').innerText+='${l}';this.style.display='none'">${l}</button>`).join('')}
+            </div>
+            <button class="btn" style="margin-top:20px;background:#2ecc71" onclick="checkScramble('${safeEn}')">تحقق</button>
+        `;
+    }
+}
+
+function closeGame() {
+    document.getElementById('activeGame').style.display = 'none';
+    document.getElementById('panelGames').style.display = 'block';
+}
+
+function checkAnswer(el, isCorrect, type) {
+    if(isCorrect) {
+        el.classList.add('correct');
+        showFeedback(true);
+        setTimeout(() => startGame(type), 1500);
+    } else {
+        el.classList.add('incorrect');
+        showFeedback(false);
+    }
+}
+
+function checkScramble(correct) {
+    const ans = document.getElementById('ans').innerText;
+    if(ans.toLowerCase().replace(/\s/g,'') === correct.toLowerCase().replace(/\s/g,'')) {
+        showFeedback(true);
+        setTimeout(() => startGame('scramble'), 1500);
+    } else {
+        showFeedback(false);
+        setTimeout(() => startGame('scramble'), 1000);
+    }
+}
+
+function showFeedback(good) {
+    const popup = document.getElementById('fbPopup');
+    if(good) {
+        user.pts += 10;
+        updateUserUI();
+        popup.innerHTML = `<div style="font-size:3rem">🎉</div><h2>ممتاز!</h2>`;
+        speak('Good job');
+    } else {
+        popup.innerHTML = `<div style="font-size:3rem">🤔</div><h2>حاول مرة أخرى</h2>`;
+        speak('Try again');
+    }
+    popup.classList.add('show');
+    setTimeout(() => popup.classList.remove('show'), 1500);
+}
+
+function updateUserUI() {
+    document.getElementById('pts').innerText = user.pts;
+    document.getElementById('shopPts').innerText = user.pts;
+    document.getElementById('myAvatar').src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.current}`;
+    document.getElementById('heroAvatar').src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.current}`;
+    localStorage.setItem('user', JSON.stringify(user));
+    
+    // Shop UI
+    const list = document.getElementById('avatarList');
+    list.innerHTML = avatars.map(av => {
+        const owned = user.avatars.includes(av.id);
+        return `
+            <div class="avatar-item ${!owned ? 'locked' : ''}" onclick="buyAvatar('${av.id}', ${av.price})" style="opacity:${owned?1:0.5}">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${av.id}" style="width:50px">
+                <div>${owned ? 'مملوك' : av.price + '💰'}</div>
+            </div>`;
+    }).join('');
+}
+
+function buyAvatar(id, price) {
+    if(user.avatars.includes(id)) {
+        user.current = id;
+        updateUserUI();
+        alert('تم اختيار الشخصية!');
+    } else {
+        if(user.pts >= price) {
+            user.pts -= price;
+            user.avatars.push(id);
+            user.current = id;
+            updateUserUI();
+        } else alert('نقاط غير كافية!');
+    }
+}
+
+function resetApp() {
+    if(confirm('حذف جميع البيانات؟')) { localStorage.clear(); location.reload(); }
+}
+</script>
+</body>
+</html>
